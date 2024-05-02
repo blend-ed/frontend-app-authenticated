@@ -5,8 +5,8 @@ import { Redirect } from 'react-router-dom';
 const ExamplePage = () => {
 
     const authenticatedUser = getAuthenticatedUser();
-    const redirectUrl = getLoginRedirectUrl(window.location.origin + '/asd');
-    const logoutUrl = getLogoutRedirectUrl(window.location.origin + '/asd');
+    const redirectUrl = getLoginRedirectUrl(window.location.origin + '/authenticated');
+    const logoutUrl = getLogoutRedirectUrl(window.location.origin + '/authenticated');
 
     console.log(redirectUrl);
 
@@ -30,7 +30,7 @@ const ExamplePage = () => {
                         <p>Authenticated User:</p>
                         <pre>{JSON.stringify(authenticatedUser, null, 2)}</pre>
                     </div>
-                    <Button href={process.env.LOGOUT_URL + `?next=${window.location.origin}/asd`} variant="primary">Logout</Button>
+                    <Button href={process.env.LOGOUT_URL + `?next=${window.location.origin}/authenticated`} variant="primary">Logout</Button>
                 </Container>
             </main>
         )
