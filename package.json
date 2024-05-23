@@ -33,6 +33,7 @@
     "url": "https://github.com/openedx/frontend-app-authenticated/issues"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@edx/brand": "npm:@edx/brand-openedx@1.2.0",
     "@edx/frontend-component-footer": "11.7.1",
     "@edx/frontend-component-header": "3.6.5",
