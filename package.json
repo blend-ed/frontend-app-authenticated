@@ -33,6 +33,7 @@
     "url": "https://github.com/openedx/frontend-app-authenticated/issues"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@edx/brand": "npm:@edx/brand-openedx@1.2.0",
     "@edx/frontend-component-footer": "11.7.1",
     "@edx/frontend-component-header": "3.6.5",
@@ -45,6 +46,7 @@
     "@fortawesome/react-fontawesome": "0.2.0",
     "acorn": "^8.11.3",
     "core-js": "3.27.2",
+    "graphql": "^16.6.0",
     "jquery": "^3.7.1",
     "popper.js": "^1.16.1",
     "prop-types": "15.8.1",

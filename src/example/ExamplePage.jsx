@@ -1,14 +1,25 @@
-import { getAuthenticatedUser, getLoginRedirectUrl, getLogoutRedirectUrl } from '@edx/frontend-platform/auth';
+import { getAuthenticatedUser, getLoginRedirectUrl } from '@edx/frontend-platform/auth';
 import { Button, Container } from '@edx/paragon';
-import { Redirect } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
+
+const EG_QUERY = gql`
+    query StaffUsers {
+        auth_user(where: {is_staff: {_eq: 1}}) {
+            email
+            id
+            is_staff
+            is_active
+            is_superuser
+        }
+    }
+`;
 
 const ExamplePage = () => {
 
     const authenticatedUser = getAuthenticatedUser();
     const redirectUrl = getLoginRedirectUrl(window.location.origin + '/authenticated');
-    const logoutUrl = getLogoutRedirectUrl(window.location.origin + '/authenticated');
 
-    console.log(redirectUrl);
+    const { loading, error, data } = useQuery(EG_QUERY);
 
     if (!authenticatedUser) {
         return (
@@ -26,10 +37,27 @@ const ExamplePage = () => {
                 <Container className="py-5">
                     <h1>Authenticated</h1>
                     <p>Welcome {authenticatedUser.username}!</p>
-                    <div>
+                    {/* <div>
                         <p>Authenticated User:</p>
                         <pre>{JSON.stringify(authenticatedUser, null, 2)}</pre>
+                    </div> */}
+
+                    <div>
+                        <p>
+                            Example Query:
+                        </p>
+                        <pre>{EG_QUERY.loc.source.body}</pre>
                     </div>
+
+                    <div>
+                        {data && data.auth_user.length > 0 && (
+                            <div>
+                                <p>Query Result:</p>
+                                <pre>{JSON.stringify(data.auth_user, null, 2)}</pre>
+                            </div>
+                        )}
+                    </div>
+
                     <Button href={process.env.LOGOUT_URL + `?next=${window.location.origin}/authenticated`} variant="primary">Logout</Button>
                 </Container>
             </main>
